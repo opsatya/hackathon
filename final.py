@@ -136,7 +136,7 @@ def get_current_price(five_paisa_client, scrip_data):
     
 def deploy_remote_script():
     # AWS EC2 Instance Details
-    EC2_HOST = "34.229.205"  # 🔹 Replace with your EC2 public IP
+    EC2_HOST = "34.229.205.14"  # 🔹 Replace with your EC2 public IP
     USERNAME = "ubuntu"      # 🔹 Replace with your EC2 username
     KEY_PATH = "124363.pem"  # 🔹 Replace with your private key file path
     REMOTE_SCRIPT = "/home/ubuntu/test4/hackathon/deployment.py"  # 🔹 Path of test4.py on EC2
