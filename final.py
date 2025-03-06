@@ -138,7 +138,7 @@ def deploy_remote_script():
     # AWS EC2 Instance Details
     EC2_HOST = "34.229.205"  # 🔹 Replace with your EC2 public IP
     USERNAME = "ubuntu"      # 🔹 Replace with your EC2 username
-    KEY_PATH = "test-5-11pm.pem"  # 🔹 Replace with your private key file path
+    KEY_PATH = "124363.pem"  # 🔹 Replace with your private key file path
     REMOTE_SCRIPT = "/home/ubuntu/test4/hackathon/deployment.py"  # 🔹 Path of test4.py on EC2
 
     # Create an SSH client
