@@ -139,8 +139,8 @@ def deploy_remote_script():
     # AWS EC2 Instance Details
     EC2_HOST = "34.229.205.14"  # 🔹 Replace with your EC2 public IP
     USERNAME = "ubuntu"      # 🔹 Replace with your EC2 username
-    KEY_PATH = "124363.pem"  # 🔹 Replace with your private key file path
-    REMOTE_SCRIPT = "/home/ubuntu/test4/hackathon/deployment.py"  # 🔹 Path of test4.py on EC2
+    KEY_PATH = "94463.pem"  # 🔹 Replace with your private key file path
+    REMOTE_SCRIPT = "/home/ubuntu/test13/hackathon/deployment.py"  # 🔹 Path of test4.py on EC2
 
     # Create an SSH client
     ssh = paramiko.SSHClient()
