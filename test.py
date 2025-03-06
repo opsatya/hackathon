@@ -924,7 +924,6 @@ Metrics:
 
 Ensure that your response includes a line starting with "Score:" exactly followed by a numerical score and "/100".
 """
-
     # Call OpenRouter API using your cached function.
     # Replace "your-model-name" with the actual model identifier you wish to use.
     response_text = cached_openrouter_request(
