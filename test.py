@@ -908,13 +908,13 @@ def generate_scoring_verdict(stock, year=None):
     current_data = stock['years'][year]
     # Build a prompt that includes key metrics and instructions for the response format
     prompt = f"""
-You are a senior financial analyst. Evaluate the following financial metrics for {stock['Stock']} for the fiscal year {year} and provide your analysis strictly in the following format:
+You are a senior financial analyst. Evaluate the following financial metrics for {stock['Stock']} for the fiscal year {year} and provide a **detailed** analysis in the following format:
 
 Score: <number>/100
-Recommendation: <text>  (one of "Strong Buy", "Buy", "Hold", "Risky - Consider Exit")
-Analysis: <detailed explanation with at least 5 lines>
+Recommendation: <text> (Choose from "Strong Buy", "Buy", "Hold", "Risky - Consider Exit")
+Analysis: <detailed explanation of at least **200 words**, covering financial health, growth potential, risks, and investor sentiment>
 
-Metrics:
+### **Metrics**:
 - Revenue Growth: {current_data.get('RevenueGrowth', 'Data not available')}%
 - EBITDA Growth: {current_data.get('EBITDAGrowth', 'Data not available')}%
 - Net Profit Margin: {current_data.get('NetProfitMargin', 'Data not available')}%
@@ -922,7 +922,14 @@ Metrics:
 - Interest Coverage: {current_data.get('InterestCoverage', 'Data not available')}
 - Promoter Holding: {current_data.get('PromoterHolding', 'Data not available')}%
 
-Ensure that your response includes a line starting with "Score:" exactly followed by a numerical score and "/100".
+Your response should:
+1. **Compare these metrics to industry benchmarks** (if available) and interpret whether they are strong or weak.
+2. **Discuss the potential risks** that may concern investors.
+3. **Analyze how the company’s financial health aligns with market trends**.
+4. **Explain why you assigned the given score**.
+5. Provide a **conclusion with a clear investment recommendation**.
+
+**Ensure that your response includes at least 200 words** and starts with "Score: <value>/100" on a new line.
 """
     # Call OpenRouter API using your cached function.
     # Replace "your-model-name" with the actual model identifier you wish to use.
@@ -940,7 +947,8 @@ def bold(text):
 
 
 def send_to_openrouter(payload, max_retries=3, retry_delay=5):
-    api_key = os.getenv('OPENROUTER_API_KEY') or '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'
+    OPENPOUTER_API_KEY='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'
+    api_key = os.getenv('OPENROUTER_API_KEY') or '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'
     if not api_key:
         return {"error": "API key not found. Please set OPENROUTER_API_KEY."}
     url = "https://openrouter.ai/api/v1/chat/completions"
