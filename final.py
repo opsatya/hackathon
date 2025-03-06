@@ -40,6 +40,7 @@ import re
 import traceback
 import glob
 import pytz
+import paramiko
 import neo_api_client
 from neo_api_client import NeoAPI
 from datetime import datetime
@@ -132,6 +133,36 @@ def get_current_price(five_paisa_client, scrip_data):
     except Exception as e:
         print(f"Error fetching price: {e}")
         return None
+    
+def deploy_remote_script():
+    # AWS EC2 Instance Details
+    EC2_HOST = "107.23.9.12"  # 🔹 Replace with your EC2 public IP
+    USERNAME = "ubuntu"      # 🔹 Replace with your EC2 username
+    KEY_PATH = "test-5-11pm.pem"  # 🔹 Replace with your private key file path
+    REMOTE_SCRIPT = "/home/ubuntu/test4.py"  # 🔹 Path of test4.py on EC2
+
+    # Create an SSH client
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+    try:
+        print("[INFO] Connecting to EC2 instance...")
+        ssh.connect(EC2_HOST, username=USERNAME, key_filename=KEY_PATH)
+
+        # Run the script in the background
+        command = f"nohup python3 {REMOTE_SCRIPT} > output.log 2>&1 & echo $!"
+        stdin, stdout, stderr = ssh.exec_command(command)
+
+        # Get the process ID (PID)
+        pid = stdout.read().decode().strip()
+        result = f"[INFO] Script started with PID: {pid}\n[INFO] Check logs using: cat output.log"
+    except Exception as e:
+        result = f"[ERROR] {str(e)}"
+    finally:
+        print("[INFO] Connection closed.")
+        ssh.close()
+    return result
+
 
 def historical_trend_analysis(stock, metric, start_year=None, years=5):
     all_years = sorted(stock['years'].keys(), reverse=True)
@@ -853,11 +884,15 @@ def process_query(query, stock_data, five_paisa_client, neo_client):
                 return f"Unable to fetch the current price for {stock['Stock']} at this time."
 
         return generate_scoring_verdict(stock, extracted_year)
+    
+    if lower_query.strip() == "deploy":
+        return deploy_remote_script()
 
     if any(term in lower_query for term in ['stock', 'share', 'market', 'invest', 'finance', 'analysis']):
         return "I don't have information about this specific stock or query in my database. I can help you analyze stocks in my database. Could you ask about one of those instead?"
     else:
         return "I'm specialized in stock analysis based on my financial database. I don’t have information to answer this query. Could I help you with analyzing stocks in my database instead?"
+    
 def generate_scoring_verdict(stock, year=None):
     """Generate comprehensive stock analysis with enhanced formatting"""
     if not year:
