@@ -155,14 +155,20 @@ def deploy_remote_script():
 
         # Get the process ID (PID)
         pid = stdout.read().decode().strip()
-        result = f"[INFO] Script started with PID: {pid}\n[INFO] Check logs using: cat output.log"
+        
+        # Get current time in IST (UTC+5:30)
+        ist_timezone = timezone(timedelta(hours=5, minutes=30))
+        current_time = datetime.now(ist_timezone).strftime("%Y-%m-%d %H:%M:%S")
+        
+        result = (f"[INFO] Script started with PID: {pid}\n"
+                  f"[INFO] Check logs using: cat output.log\n"
+                  f"Your Algo has been deployed on AWS server with IP {EC2_HOST} at time {current_time} in IST")
     except Exception as e:
         result = f"[ERROR] {str(e)}"
     finally:
         print("[INFO] Connection closed.")
         ssh.close()
     return result
-
 
 def historical_trend_analysis(stock, metric, start_year=None, years=5):
     all_years = sorted(stock['years'].keys(), reverse=True)
