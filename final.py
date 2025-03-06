@@ -136,10 +136,10 @@ def get_current_price(five_paisa_client, scrip_data):
     
 def deploy_remote_script():
     # AWS EC2 Instance Details
-    EC2_HOST = "107.23.9.12"  # 🔹 Replace with your EC2 public IP
+    EC2_HOST = "34.229.205"  # 🔹 Replace with your EC2 public IP
     USERNAME = "ubuntu"      # 🔹 Replace with your EC2 username
     KEY_PATH = "test-5-11pm.pem"  # 🔹 Replace with your private key file path
-    REMOTE_SCRIPT = "/home/ubuntu/test4.py"  # 🔹 Path of test4.py on EC2
+    REMOTE_SCRIPT = "/home/ubuntu/test4/hackathon/deployment.py"  # 🔹 Path of test4.py on EC2
 
     # Create an SSH client
     ssh = paramiko.SSHClient()
