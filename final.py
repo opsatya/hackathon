@@ -57,7 +57,7 @@ def safe_float(value, default=0.0):
     except (TypeError, ValueError):
         return default
 
-def load_stock_data(directory='D:/final/stock_data'):
+def load_stock_data(directory='stock_data'):
     data = []
     json_files = glob.glob(os.path.join(directory, "*.json"))
     if not json_files:
@@ -1036,7 +1036,7 @@ def stream_response(text):
         time.sleep(0.01)
 
 def main_chatbot():
-    STOCK_DATA_DIRECTORY = 'D:/final/stock_data'
+    STOCK_DATA_DIRECTORY = 'stock_data'
     stock_data = load_stock_data(STOCK_DATA_DIRECTORY)
 
     # Initialize FivePaisaClient with provided credentials
