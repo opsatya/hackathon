@@ -940,7 +940,7 @@ def bold(text):
 
 
 def send_to_openrouter(payload, max_retries=3, retry_delay=5):
-    api_key = os.getenv('OPENROUTER_API_KEY') or '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'
+    api_key = os.getenv('OPENROUTER_API_KEY') or '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'
     if not api_key:
         return {"error": "API key not found. Please set OPENROUTER_API_KEY."}
     url = "https://openrouter.ai/api/v1/chat/completions"
