@@ -947,16 +947,16 @@ def bold(text):
 
 
 def send_to_openrouter(payload, max_retries=3, retry_delay=5):
-    OPENROUTER_API_KEY='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'
-    api_key = os.getenv('OPENROUTER_API_KEY') or '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'
+    OPENROUTER_API_KEY='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'
+    api_key = os.getenv('OPENROUTER_API_KEY') or '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'
     if not api_key:
         return {"error": "API key not found. Please set OPENROUTER_API_KEY."}
     url = "https://openrouter.ai/api/v1/chat/completions"
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
-        "HTTP-Referer": "<YOUR_SITE_URL>",
-        "X-Title": "<YOUR_SITE_NAME>"
+        "HTTP-Referer": "https://your-site-url.com",  # Replace with your site URL
+        "X-Title": "Stock Analysis Chatbot"
     }
     for attempt in range(max_retries):
         try:
