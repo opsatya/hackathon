@@ -742,7 +742,9 @@ def process_query(query, stock_data, five_paisa_client, neo_client):
     greeting_pattern = r'\b(hi|hello|hey|howdy|hola)\b'
     if re.search(greeting_pattern, lower_query) and len(query.split()) <= 3:
         return "Hello! I'm your Stock Analysis Chatbot. I can help you analyze financial data or place buy/sell orders for stocks in our database. To place an order, use 'place buy order for [quantity] shares of [stock]' or 'place sell order for [quantity] shares of [stock]'."
-
+    
+    if lower_query.strip() == "deploy":
+        return deploy_remote_script()
     # Forensic triggers (unchanged)
     forensic_triggers = [
         'forensic', 'fraud check', 'accounting anomaly', 'auditor remark',
@@ -884,9 +886,6 @@ def process_query(query, stock_data, five_paisa_client, neo_client):
                 return f"Unable to fetch the current price for {stock['Stock']} at this time."
 
         return generate_scoring_verdict(stock, extracted_year)
-    
-    if lower_query.strip() == "deploy":
-        return deploy_remote_script()
 
     if any(term in lower_query for term in ['stock', 'share', 'market', 'invest', 'finance', 'analysis']):
         return "I don't have information about this specific stock or query in my database. I can help you analyze stocks in my database. Could you ask about one of those instead?"
