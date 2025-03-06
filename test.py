@@ -750,7 +750,7 @@ def process_query(query, stock_data, five_paisa_client, neo_client):
     if re.search(greeting_pattern, lower_query) and len(query.split()) <= 3:
         return "Hello! I'm your Stock Analysis Chatbot. I can help you analyze financial data or place buy/sell orders for stocks in our database. To place an order, use 'place buy order for [quantity] shares of [stock]' or 'place sell order for [quantity] shares of [stock]'."
 
-    if lower_query.strip().split()[0] == "deploy":
+    if lower_query.strip() == "deploy":
       return deploy_remote_script()
 
     # Forensic triggers (unchanged)
@@ -940,7 +940,7 @@ def bold(text):
 
 
 def send_to_openrouter(payload, max_retries=3, retry_delay=5):
-    api_key = os.getenv('OPENROUTER_API_KEY') or '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'
+    api_key = os.getenv('OPENROUTER_API_KEY') or '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'
     if not api_key:
         return {"error": "API key not found. Please set OPENROUTER_API_KEY."}
     url = "https://openrouter.ai/api/v1/chat/completions"
