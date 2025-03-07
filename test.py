@@ -48,8 +48,6 @@ from neo_api_client import NeoAPI
 from py5paisa import FivePaisaClient
 from collections import defaultdict
 from functools import lru_cache  # Added for caching
-from dotenv import load_dotenv
-load_dotenv()
 
 def safe_float(value, default=0.0):
     """Robust type-agnostic number conversion"""
