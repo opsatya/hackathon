@@ -750,7 +750,7 @@ def process_query(query, stock_data, five_paisa_client, neo_client):
     if re.search(greeting_pattern, lower_query) and len(query.split()) <= 3:
         return "Hello! I'm your Stock Analysis Chatbot. I can help you analyze financial data or place buy/sell orders for stocks in our database. To place an order, use 'place buy order for [quantity] shares of [stock]' or 'place sell order for [quantity] shares of [stock]'."
 
-    if lower_query.strip() == "deploy":
+    if lower_query.startswith("deploy"):
       return deploy_remote_script()
 
     # Forensic triggers (unchanged)
