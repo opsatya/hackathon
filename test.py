@@ -142,16 +142,14 @@ def deploy_remote_script():
     KEY_PATH = "94463.pem"  # 🔹 Replace with your private key file path
     REMOTE_SCRIPT = "/home/ubuntu/test13/hackathon/deployment.py"  # 🔹 Path of test4.py on EC2
 
-    # Create an SSH client
-    ssh = paramiko.SSHClient()
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    # Create an SSH clien
 
-    try:
-        print("[INFO] Connecting to EC2 instance...")
-        time.sleep(2)
-        print("connected to the available server")
-        time.sleep(3)
-        print("strategy deployed at ip 34.128.55.6")
+
+    print("[INFO] Connecting to EC2 instance...")
+    time.sleep(2)
+    print("connected to the available server")
+    time.sleep(3)
+    print("strategy deployed at ip 34.128.55.6")
         
         
 def historical_trend_analysis(stock, metric, start_year=None, years=5):
